@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Створити Тест</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Конструктор Тестів</h1>
+            <a href="/dashboard.html" class="btn btn-secondary">Повернутися до панелі</a>
+        </div>
+        
+        <form id="create-test-form">
+            <div class="card mb-4"><div class="card-header">Загальна інформація</div><div class="card-body"><input type="text" id="test-title" class="form-control" required placeholder="Назва тесту"></div></div>
+            <div class="card mb-4">
+                <div class="card-header">Налаштування Тесту</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Потік та Навігація</h5>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="setting-disallow-return"><label class="form-check-label" for="setting-disallow-return">Заборонити повернення до питань</label></div>
+                            <div class="form-check ml-4"><input class="form-check-input" type="checkbox" id="setting-allow-change-answer" checked><label class="form-check-label" for="setting-allow-change-answer">Дозволити змінювати відповідь</label></div>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="setting-require-answer" checked><label class="form-check-label" for="setting-require-answer">Вимагати відповідь для переходу далі</label></div>
+                            <hr>
+                            <h5>Перемішування</h5>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="setting-shuffle-questions"><label class="form-check-label" for="setting-shuffle-questions">Випадковий порядок питань</label></div>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="setting-shuffle-answers"><label class="form-check-label" for="setting-shuffle-answers">Випадковий порядок відповідей</label></div>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Доступ та Час</h5>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="setting-unique-attempt"><label class="form-check-label" for="setting-unique-attempt">Унікальна спроба (нереалізовано)</label></div>
+                            <div class="form-group mt-2"><label for="setting-time-limit">Ліміт часу на весь тест (в хвилинах, 0 = без ліміту)</label><input type="number" id="setting-time-limit" class="form-control" value="0" min="0"></div>
+                            <div class="form-group"><label for="setting-close-date">Закрити тест після (дата та час)</label><input type="datetime-local" id="setting-close-date" class="form-control"></div>
+                            <hr>
+                            <h5>Результати</h5>
+                            <div class="form-check"><input class="form-check-input" type="checkbox" id="setting-show-score" checked><label class="form-check-label" for="setting-show-score">Показувати оцінку в кінці</label></div>
+                            <div class="form-check ml-4"><input class="form-check-input" type="checkbox" id="setting-show-answers" checked><label class="form-check-label" for="setting-show-answers">Показувати правильні відповіді</label></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="questions-container"></div>
+            <button type="button" id="add-question-btn" class="btn btn-info mt-3">Додати питання</button>
+            <button type="submit" class="btn btn-success mt-3 float-right">Зберегти тест</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="js/create.js"></script>
+</body>
+</html>

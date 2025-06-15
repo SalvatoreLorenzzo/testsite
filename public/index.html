@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пройти тест</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title text-center">Пройти тест</h2>
+                        <div id="alert-box" class="alert alert-danger" style="display: none;"></div>
+                        <form id="start-test-form">
+                            <div class="form-group"><label for="participant-name">Ваше ім'я та прізвище</label><input type="text" id="participant-name" class="form-control" required minlength="4"></div>
+                            <div class="form-group"><label for="test-code">Код тесту</label><input type="text" id="test-code" class="form-control" required></div>
+                            <button type="submit" class="btn btn-primary btn-block">Почати</button>
+                        </form>
+                    </div>
+                </div>
+                <p class="text-center mt-3"><a href="/login.html">Я власник тесту</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#start-test-form').on('submit', function(e) {
+                e.preventDefault();
+                const name = $('#participant-name').val();
+                const code = $('#test-code').val();
+                
+                fetch(`/api/tests/${code}/start`, { method: 'POST' })
+                    .then(res => {
+                        if (!res.ok) { return res.json().then(err => Promise.reject(err)); }
+                        sessionStorage.setItem('participantName', name);
+                        window.location.href = `/test.html?code=${code}`;
+                    })
+                    .catch(err => {
+                        $('#alert-box').text(err.message || 'Помилка завантаження тесту').show();
+                    });
+            });
+        });
+    </script>
+</body>
+</html>

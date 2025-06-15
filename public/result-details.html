@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Деталі проходження</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .option-correct { color: #28a745; font-weight: bold; }
+        .option-user-correct { background-color: #d4edda; }
+        .option-user-incorrect { background-color: #f8d7da; text-decoration: line-through; }
+    </style>
+</head>
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 id="participant-name"></h1>
+                <p class="text-muted" id="submission-date"></p>
+            </div>
+            <a href="javascript:history.back()" class="btn btn-secondary">Назад до результатів</a>
+        </div>
+        <div id="details-container"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="js/result-details.js"></script>
+</body>
+</html>
