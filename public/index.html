@@ -3,26 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Пройти тест</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Пройти тест | TestMaster</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/cyborg/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body class="bg-light">
-    <div class="container">
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title text-center">Пройти тест</h2>
-                        <div id="alert-box" class="alert alert-danger" style="display: none;"></div>
-                        <form id="start-test-form">
-                            <div class="form-group"><label for="participant-name">Ваше ім'я та прізвище</label><input type="text" id="participant-name" class="form-control" required minlength="4"></div>
-                            <div class="form-group"><label for="test-code">Код тесту</label><input type="text" id="test-code" class="form-control" required></div>
-                            <button type="submit" class="btn btn-primary btn-block">Почати</button>
-                        </form>
-                    </div>
+<body class="main-page">
+    <div class="background-overlay"></div>
+    <div class="page-wrapper">
+        
+        <div class="main-content-container animate__animated animate__fadeInDown">
+            <h1 class="display-4 page-title-gradient text-center">Ласкаво просимо до TestMaster</h1>
+            <p class="lead page-subtitle text-center mb-5">Введіть ваше ім'я та код, щоб розпочати тестування.</p>
+
+            <div class="col-12 mx-auto form-container">
+                <div class="login-card p-4">
+                    <div id="alert-box" class="alert alert-danger" style="display: none;"></div>
+                    <form id="start-test-form">
+                        <div class="form-group animate__animated animate__fadeInUp" style="animation-delay: 0.2s;">
+                            <div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-user-edit"></i></span></div><input type="text" id="participant-name" class="form-control" placeholder="Ваше ім'я та прізвище" required minlength="4"></div>
+                        </div>
+                        <div class="form-group animate__animated animate__fadeInUp" style="animation-delay: 0.3s;">
+                             <div class="input-group"><div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-hashtag"></i></span></div><input type="text" id="test-code" class="form-control" placeholder="Код тесту" required></div>
+                        </div>
+                        <button type="submit" class="btn btn-gradient btn-block btn-lg mt-4 animate__animated animate__fadeInUp" style="animation-delay: 0.4s;">Почати тест</button>
+                    </form>
                 </div>
-                <p class="text-center mt-3"><a href="/login.html">Я власник тесту</a></p>
             </div>
+        </div>
+
+        <div class="footer-links-main animate__animated animate__fadeInUp" style="animation-delay: 0.5s;">
+            <a href="/login.html">Вхід для авторів</a>
         </div>
     </div>
 
@@ -32,17 +47,35 @@
             $('#start-test-form').on('submit', function(e) {
                 e.preventDefault();
                 const name = $('#participant-name').val();
-                const code = $('#test-code').val();
-                
-                fetch(`/api/tests/${code}/start`, { method: 'POST' })
-                    .then(res => {
-                        if (!res.ok) { return res.json().then(err => Promise.reject(err)); }
-                        sessionStorage.setItem('participantName', name);
-                        window.location.href = `/test.html?code=${code}`;
-                    })
-                    .catch(err => {
-                        $('#alert-box').text(err.message || 'Помилка завантаження тесту').show();
-                    });
+                const code = $('#test-code').val().trim();
+                const startButton = $(this).find('button');
+                const alertBox = $('#alert-box');
+
+                alertBox.hide();
+                startButton.prop('disabled', true).html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Перевірка...');
+
+                // Простий POST-запит без Fingerprint
+                fetch(`/api/tests/${code}/start`, {
+                    method: 'POST'
+                })
+                .then(res => {
+                    if (!res.ok) {
+                        // Якщо сервер повернув помилку (404, 403), отримуємо її текст
+                        return res.json().then(err => Promise.reject(err));
+                    }
+                    // Якщо все добре, просто продовжуємо
+                    return res.json();
+                })
+                .then(data => {
+                    // Успіх: тест знайдено і доступний
+                    sessionStorage.setItem('participantName', name);
+                    window.location.href = `/test.html?code=${code}`;
+                })
+                .catch(err => {
+                    // Обробка помилки: показуємо повідомлення з сервера
+                    alertBox.text(err.message || "Сталася невідома помилка").show();
+                    startButton.prop('disabled', false).text('Почати тест');
+                });
             });
         });
     </script>

@@ -3,62 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Проходження Тесту</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        .correct { border-left: 5px solid #28a745; } 
-        .incorrect { border-left: 5px solid #dc3545; }
-        .timer-container {
-            position: relative;
-            background-color: #e9ecef;
-            border-radius: .25rem;
-            display: none;
-        }
-        .timer-progress-bar {
-            height: 30px;
-            background-color: #ffc107;
-            border-radius: .25rem;
-            transition: width linear;
-        }
-        .timer-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-weight: bold;
-            color: #212529;
-        }
-    </style>
+    <title>Проходження Тесту | TestMaster</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/slate/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-    <div class="container mt-4 mb-5">
+<body class="dashboard-page">
+    <nav class="navbar navbar-dark bg-dark main-navbar">
+        <div class="container">
+            <span class="navbar-brand font-weight-bold" id="test-title-header"></span>
+            <span class="navbar-text" id="test-timer"></span>
+        </div>
+    </nav>
+    <div class="container test-container">
         <div id="test-view">
-            <h2 id="test-title" class="text-center mb-3"></h2>
-            
-            <div class="progress mb-4">
-                <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;">0/0</div>
+            <div class="progress main-progress mb-4">
+                <div id="progress-bar" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+                <span id="progress-text" class="progress-text"></span>
             </div>
-
-            <div id="question-card" class="card">
-                <div class="card-header d-flex justify-content-between align-items-center" id="question-header"></div>
+            <div id="question-card" class="card test-question-card animate__animated animate__fadeIn">
+                <div class="card-header" id="question-header"></div>
                 <div class="card-body" id="question-body"></div>
                 <div id="question-timer-container" class="timer-container m-3">
                     <div id="question-timer-bar" class="timer-progress-bar"></div>
                     <span id="question-timer-text" class="timer-text"></span>
                 </div>
             </div>
-
             <div class="d-flex justify-content-between mt-4">
-                <button id="prev-btn" class="btn btn-secondary">Назад</button>
-                <button id="next-btn" class="btn btn-primary">Далі</button>
-                <button id="finish-btn" class="btn btn-success" style="display: none;">Завершити</button>
+                <button id="prev-btn" class="btn btn-secondary btn-lg"><i class="fas fa-chevron-left mr-2"></i>Назад</button>
+                <button id="next-btn" class="btn btn-primary btn-lg">Далі<i class="fas fa-chevron-right ml-2"></i></button>
+                <button id="finish-btn" class="btn btn-success btn-lg" style="display: none;" data-toggle="modal" data-target="#confirmSubmitModal"><i class="fas fa-check-circle mr-2"></i>Завершити</button>
             </div>
         </div>
         
-        <div id="result-view" style="display: none;"></div>
+        <div id="result-view" style="display: none;">
+            <!-- Результати будуть тут -->
+            <div class="text-center mt-5">
+                <a href="/" class="btn btn-lg btn-outline-info">На головну</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальне вікно для підтвердження завершення -->
+    <div class="modal fade" id="confirmSubmitModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header"><h5 class="modal-title">Завершення тесту</h5></div>
+          <div class="modal-body"><p>Ви впевнені, що хочете завершити тест? Після цього ви не зможете змінити свої відповіді.</p></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Повернутися до тесту</button>
+            <button type="button" class="btn btn-success" id="confirm-submit-btn">Так, завершити</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/simplelightbox/2.14.2/simple-lightbox.min.js"></script>
     <script src="js/take.js"></script>
 </body>
 </html>

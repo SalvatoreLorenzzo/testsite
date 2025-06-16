@@ -3,31 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Моя панель</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Моя Панель | TestMaster</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/slate/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<body class="dashboard-page">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top main-navbar">
         <div class="container">
-            <a class="navbar-brand" href="#">Панель Тестів</a>
-            <div class="collapse navbar-collapse">
+            <a class="navbar-brand page-title-gradient" href="#">TestMaster</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><span class="navbar-text mr-3" id="username-display"></span></li>
-                    <li class="nav-item"><button id="logout-btn" class="btn btn-outline-light">Вийти</button></li>
+                    <li class="nav-item d-flex align-items-center">
+                        <span class="navbar-text mr-3" id="username-display"></span>
+                    </li>
+                    <li class="nav-item">
+                        <button id="logout-btn" class="btn btn-outline-danger"><i class="fas fa-sign-out-alt mr-1"></i>Вийти</button>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container mt-4">
-        <h2>Мої Тести</h2>
-        <a href="/create.html" class="btn btn-primary mb-3">Створити новий тест</a>
-        <table class="table table-hover">
-            <thead><tr><th>Назва Тесту</th><th>Код</th><th>Статус</th><th>Проходжень</th><th>Дії</th></tr></thead>
-            <tbody id="tests-table-body"></tbody>
-        </table>
+    <div class="container dashboard-container">
+        <div class="dashboard-header mb-5">
+            <h1 class="display-4 text-light">Мої Тести</h1>
+            <a href="/create.html" class="btn btn-primary btn-lg mt-3 mt-md-0"><i class="fas fa-plus mr-2"></i>Створити тест</a>
+        </div>
+        
+        <div id="tests-grid" class="row">
+            <!-- Картки тестів -->
+        </div>
+
+        <div id="no-tests-placeholder" class="text-center p-5 mt-5" style="display: none;">
+            <i class="fas fa-file-alt fa-5x text-secondary mb-4"></i>
+            <h3 class="text-light">У вас ще немає створених тестів</h3>
+            <p class="lead text-muted">Натисніть "Створити тест", щоб почати.</p>
+        </div>
     </div>
+
+    <!-- Модальне вікно -->
+    <div class="modal fade" id="deleteConfirmModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Підтвердження видалення</h5>
+            <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+          </div>
+          <div class="modal-body">
+            <p>Ви впевнені, що хочете видалити тест "<strong id="test-to-delete-title"></strong>"? Цю дію неможливо буде скасувати.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
+            <button type="button" class="btn btn-danger" id="confirm-delete-btn">Так, видалити</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/dashboard.js"></script>
 </body>
 </html>
