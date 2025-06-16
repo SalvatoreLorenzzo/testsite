@@ -72,16 +72,25 @@ $(document).ready(function() {
                         <div class="form-group col-md-9"><label>Текст питання:</label><input type="text" class="form-control question-text" required></div>
                         <div class="form-group col-md-3"><label>Час (сек, 0=∞)</label><input type="number" class="form-control time-limit-seconds" value="0" min="0"></div>
                     </div>
-                    <div class="form-group">
-                        <label>Зображення до питання</label>
-                        <div class="image-preview-wrapper">
-                            <label class="btn btn-sm btn-outline-info mb-0">
-                                <i class="far fa-image mr-1"></i> Додати фото до питання
-                                <input type="file" class="d-none question-image" accept="image/*">
-                            </label>
-                            <div class="image-preview-container ml-2"></div>
+
+                    <!-- !!! ДОДАНО БЛОК З НАЛАШТУВАННЯМ ПИТАННЯ !!! -->
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="form-group mb-0">
+                            <label class="d-block">Зображення до питання</label>
+                            <div class="image-preview-wrapper">
+                                <label class="btn btn-sm btn-outline-info mb-0">
+                                    <i class="far fa-image mr-1"></i> Додати фото
+                                    <input type="file" class="d-none question-image" accept="image/*">
+                                </label>
+                                <div class="image-preview-container ml-2"></div>
+                            </div>
+                        </div>
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" class="custom-control-input multiple-choice-switch" id="multiple-choice-${qIndex}">
+                            <label class="custom-control-label" for="multiple-choice-${qIndex}">Декілька правильних відповідей</label>
                         </div>
                     </div>
+
                     <hr>
                     <label class="font-weight-bold">Варіанти відповідей:</label>
                     <div class="options-container"></div>
@@ -92,16 +101,19 @@ $(document).ready(function() {
         const newQuestion = $(questionHtml).appendTo('#questions-container');
         const optionsContainer = newQuestion.find('.options-container');
 
+        const isMultiple = (qData && qData.multipleChoice) || false;
+        newQuestion.find('.multiple-choice-switch').prop('checked', isMultiple);
+
         if (qData) {
             newQuestion.find('.question-text').val(qData.q);
             newQuestion.find('.time-limit-seconds').val(qData.timeLimitSeconds || 0);
             if (qData.imageFile) {
                 renderImagePreview(qData.imageFile, newQuestion.find('.question-image'));
             }
-            qData.options.forEach(optData => addOption(optionsContainer, qData.multipleChoice, optData));
+            qData.options.forEach(optData => addOption(optionsContainer, isMultiple, optData));
         } else {
-            addOption(optionsContainer, false);
-            addOption(optionsContainer, false);
+            addOption(optionsContainer, isMultiple);
+            addOption(optionsContainer, isMultiple);
         }
         updateQuestionNumbers();
     }
@@ -113,7 +125,9 @@ $(document).ready(function() {
             <div class="option-block mb-3">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <div class="input-group-text"><input type="${inputType}" name="correct-answer-${qId}" title="Правильна відповідь"></div>
+                        <div class="input-group-text">
+                            <input type="${inputType}" name="correct-answer-${qId}" title="Правильна відповідь">
+                        </div>
                     </div>
                     <input type="text" class="form-control option-text" placeholder="Текст варіанту" required>
                     <div class="input-group-append">
@@ -132,8 +146,8 @@ $(document).ready(function() {
         const newOption = $(optionHtml).appendTo(container);
         if (optData) {
             newOption.find('.option-text').val(optData.text);
-            newOption.find('input[type=checkbox], input[type=radio]').prop('checked', optData.isCorrect);
-             if (optData.imageFile) {
+            newOption.find(`input[type=${inputType}]`).prop('checked', optData.isCorrect);
+            if (optData.imageFile) {
                 renderImagePreview(optData.imageFile, newOption.find('.option-image'));
             }
         }
@@ -200,10 +214,11 @@ $(document).ready(function() {
         
         $('.question-block-card').each(function() {
             const qElement = $(this);
+            // !!! ЗЧИТУЄМО СТАН ПЕРЕМИКАЧА !!!
             const question = {
                 q: qElement.find('.question-text').val().trim(),
                 timeLimitSeconds: parseInt(qElement.find('.time-limit-seconds').val()) || 0,
-                multipleChoice: false,
+                multipleChoice: qElement.find('.multiple-choice-switch').is(':checked'),
                 image: null,
                 options: [],
                 correct: []
@@ -438,6 +453,27 @@ $(document).ready(function() {
         startAtIndex: clickedIndex 
     }).open();
 
+    });
+
+    $('#questions-container').on('change', '.multiple-choice-switch', function() {
+    const isChecked = $(this).is(':checked');
+    const newType = isChecked ? 'checkbox' : 'radio';
+    const questionCard = $(this).closest('.question-block-card');
+    
+    // Знаходимо всі інпути для відповідей у цьому питанні
+    questionCard.find('.options-container input[type=radio], .options-container input[type=checkbox]').each(function() {
+        // Змінюємо їх тип
+        $(this).attr('type', newType);
+    });
+
+    // Якщо перемкнули на radio (одна відповідь), а було вибрано декілька,
+    // залишаємо вибраною тільки першу.
+    if (!isChecked) {
+        const checkedOptions = questionCard.find('.options-container input:checked');
+        if (checkedOptions.length > 1) {
+            checkedOptions.not(':first').prop('checked', false);
+        }
+    }
     });
 
 
