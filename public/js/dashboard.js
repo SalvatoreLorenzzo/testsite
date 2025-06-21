@@ -30,7 +30,7 @@ $(document).ready(function() {
         } else {
             data.tests.forEach((test, index) => {
                 const status = formatCountdown(test.settings.closeDate);
-                // --- ОСЬ ТУТ КЛЮЧОВА ЗМІНА ---
+                // --- ЗМІНА ТУТ: Кнопка "Налаштування" видалена ---
                 const cardHtml = `
                     <div class="col-12 col-lg-6 col-xl-4 mb-4 animate__animated animate__fadeInUp" style="animation-delay: ${index * 100}ms;" data-test-code="${test.code}">
                         <div class="card test-card h-100">
@@ -47,7 +47,7 @@ $(document).ready(function() {
                             <div class="card-footer d-flex justify-content-between">
                                 <a href="/results.html?code=${test.code}" class="btn btn-primary btn-sm">Результати</a>
                                 <div>
-                                    <button class="btn btn-secondary btn-sm" disabled>Налаштування</button>
+                                    <!-- <button class="btn btn-secondary btn-sm" disabled>Налаштування</button> -->
                                     <button class="btn btn-danger btn-sm delete-btn" data-toggle="modal" data-target="#deleteConfirmModal"><i class="fas fa-trash"></i></button>
                                 </div>
                             </div>

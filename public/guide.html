@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гайд для авторів | TestMaster</title>
+    <link rel="stylesheet" href="https://bootswatch.com/4/slate/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .guide-section-card .card-header {
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .guide-section-card .card-header:hover {
+            background-color: rgba(255,255,255,0.05);
+        }
+        .guide-section-card .btn-link {
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            width: 100%;
+            text-align: left;
+        }
+        .guide-section-card .btn-link .fas {
+            transition: transform 0.3s ease;
+        }
+        .guide-section-card .btn-link[aria-expanded="true"] .fas.fa-chevron-down {
+            transform: rotate(180deg);
+        }
+        .guide-section-card .card-body ul {
+            padding-left: 20px;
+        }
+        .guide-section-card .card-body li {
+            margin-bottom: 0.5rem;
+        }
+        .guide-section-card .card-body code {
+            background-color: #272B30;
+            color: #ffc107;
+            padding: .2em .4em;
+            border-radius: 3px;
+        }
+         .guide-section-card .card-body kbd {
+            padding: .2rem .4rem;
+            font-size: .875em;
+            color: #fff;
+            background-color: #212529;
+            border-radius: .2rem;
+            box-shadow: inset 0 -0.1rem 0 #495057;
+        }
+    </style>
+</head>
+<body class="dashboard-page">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top main-navbar">
+        <div class="container">
+            <a class="navbar-brand page-title-gradient" href="/">TestMaster</a>
+            <div class="navbar-nav ml-auto">
+                <a href="/dashboard.html" class="btn btn-outline-secondary"><i class="fas fa-tachometer-alt mr-1"></i>До панелі</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="container dashboard-container">
+        <h1 class="display-4 text-light mb-4">Гайд для авторів TestMaster</h1>
+        <p class="lead text-muted mb-5">
+            Ласкаво просимо до TestMaster! Цей гайд допоможе вам розібратися з усіма можливостями платформи для створення та адміністрування тестів.
+        </p>
+
+        <div class="accordion" id="guideAccordion">
+
+            <!-- Розділ 1: Реєстрація та Вхід -->
+            <div class="card form-section-card guide-section-card">
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link text-light" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            <i class="fas fa-user-plus mr-2"></i>1. Реєстрація та Вхід
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#guideAccordion">
+                    <div class="card-body">
+                        <p>Щоб почати створювати тести, вам необхідно зареєструватися або увійти до системи:</p>
+                        <ul>
+                            <li>Перейдіть на сторінку <a href="/login.html">Вхід/Реєстрація</a>.</li>
+                            <li><strong>Реєстрація:</strong>
+                                <ul>
+                                    <li>Оберіть вкладку "Реєстрація".</li>
+                                    <li>Введіть бажане <strong>Ім'я користувача</strong> (логін) та <strong>Пароль</strong> (мінімум 4 символи).</li>
+                                    <li>Натисніть кнопку <kbd>Зареєструватися</kbd>.</li>
+                                    <li>Після успішної реєстрації ви автоматично перейдете на вкладку "Вхід".</li>
+                                </ul>
+                            </li>
+                            <li><strong>Вхід:</strong>
+                                <ul>
+                                    <li>Оберіть вкладку "Вхід".</li>
+                                    <li>Введіть ваше <strong>Ім'я користувача</strong> та <strong>Пароль</strong>.</li>
+                                    <li>Натисніть кнопку <kbd>Увійти</kbd>.</li>
+                                </ul>
+                            </li>
+                            <li>Після успішного входу ви потрапите на вашу <strong>Панель керування</strong>.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Розділ 2: Панель Керування -->
+            <div class="card form-section-card guide-section-card mt-3">
+                <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link text-light collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            <i class="fas fa-tachometer-alt mr-2"></i>2. Панель Керування
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#guideAccordion">
+                    <div class="card-body">
+                        <p>Панель керування – це ваш головний робочий простір. Тут ви можете бачити всі створені вами тести та керувати ними.</p>
+                        <ul>
+                            <li><strong>Список тестів:</strong> Тести відображаються у вигляді карток.</li>
+                            <li><strong>Інформація на картці тесту:</strong>
+                                <ul>
+                                    <li><strong>Назва тесту.</strong></li>
+                                    <li><strong>Код тесту:</strong> Унікальний код, який учасники вводять для проходження. Поруч є іконка <i class="fas fa-copy"></i> для швидкого копіювання коду.</li>
+                                    <li><strong>Кількість результатів:</strong> Скільки разів цей тест було пройдено.</li>
+                                    <li><strong>Статус:</strong> Показує, чи тест відкритий, чи закритий (якщо встановлена дата закриття).</li>
+                                </ul>
+                            </li>
+                            <li><strong>Дії з тестом:</strong>
+                                <ul>
+                                    <li>Кнопка <kbd><i class="fas fa-plus mr-1"></i>Створити тест</kbd> (у верхній частині сторінки) - перехід до конструктора нового тесту.</li>
+                                    <li>Кнопка <kbd>Результати</kbd> на картці тесту - перегляд результатів проходження цього тесту.</li>
+                                    <li>Кнопка <kbd><i class="fas fa-trash"></i></kbd> (Видалити) на картці тесту - видалення тесту та всіх його результатів (потрібне підтвердження).</li>
+                                </ul>
+                            </li>
+                             <li><strong>Вихід з системи:</strong> Кнопка <kbd><i class="fas fa-sign-out-alt mr-1"></i>Вийти</kbd> у правому верхньому куті навігаційної панелі.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Розділ 3: Створення та Редагування Тесту -->
+            <div class="card form-section-card guide-section-card mt-3">
+                <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link text-light collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <i class="fas fa-edit mr-2"></i>3. Створення Тесту
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#guideAccordion">
+                    <div class="card-body">
+                        <p>Конструктор тестів дозволяє гнучко налаштовувати ваші опитування. Перейдіть до нього, натиснувши <kbd><i class="fas fa-plus mr-1"></i>Створити тест</kbd> на Панелі керування.</p>
+                        
+                        <h5>3.1. Загальна інформація</h5>
+                        <ul>
+                            <li><strong>Назва тесту:</strong> Введіть зрозумілу назву для вашого тесту. Це поле є обов'язковим.</li>
+                        </ul>
+
+                        <h5>3.2. Налаштування тесту</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <strong>Потік та Навігація:</strong>
+                                <ul>
+                                    <li><kbd>Заборонити повернення до питань:</kbd> Якщо увімкнено, учасник не зможе повернутися до попередніх питань.</li>
+                                    <li><kbd>Дозволити змінювати відповідь:</kbd> Якщо вимкнено (і повернення заборонено), відповідь фіксується після переходу далі.</li>
+                                    <li><kbd>Вимагати відповідь для переходу:</kbd> Учасник не зможе перейти до наступного питання, доки не дасть відповідь на поточне (не діє, якщо на питання є таймер).</li>
+                                </ul>
+                                <strong>Перемішування:</strong>
+                                <ul>
+                                    <li><kbd>Випадковий порядок питань:</kbd> Питання будуть показуватися в різному порядку для кожного учасника.</li>
+                                    <li><kbd>Випадковий порядок відповідей:</kbd> Варіанти відповідей для кожного питання будуть перемішані.</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <strong>Доступ та Час:</strong>
+                                <ul>
+                                    <li><kbd>Ліміт часу на весь тест (в хвилинах):</kbd> Встановіть загальний час на проходження тесту. 0 = без обмежень.</li>
+                                    <li><kbd>Закрити тест після:</kbd> Встановіть дату та час, після яких тест стане недоступним для проходження.</li>
+                                </ul>
+                                <strong>Результати:</strong>
+                                <ul>
+                                    <li><kbd>Показувати оцінку:</kbd> Чи бачитиме учасник свій результат після завершення.</li>
+                                    <li><kbd>Показувати правильні відповіді:</kbd> Якщо оцінка показується, чи бачитиме учасник детальний розбір своїх відповідей.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <h5 class="mt-3">3.3. Питання та Варіанти відповідей</h5>
+                        <ul>
+                            <li>Натисніть <kbd><i class="fas fa-plus mr-1"></i>Додати питання</kbd>, щоб створити нове питання.</li>
+                            <li><strong>Для кожного питання:</strong>
+                                <ul>
+                                    <li><strong>Текст питання:</strong> Сформулюйте ваше питання.</li>
+                                    <li><strong>Час (сек, 0=∞):</strong> Індивідуальний ліміт часу на це питання. 0 = без обмежень.</li>
+                                    <li><strong>Зображення до питання:</strong> Натисніть <kbd><i class="far fa-image mr-1"></i> Додати фото</kbd>, щоб завантажити зображення. Воно буде стиснуте автоматично. Натисніть на прев'ю для перегляду або <kbd>×</kbd> для видалення.</li>
+                                    <li><strong>Декілька правильних відповідей:</strong> Увімкніть цей перемикач, якщо на питання може бути кілька правильних варіантів. Тип вибору (чекбокси/радіокнопки) зміниться автоматично.</li>
+                                    <li><strong>Варіанти відповідей:</strong>
+                                        <ul>
+                                            <li>Натисніть <kbd><i class="fas fa-plus mr-1"></i>Додати варіант</kbd>.</li>
+                                            <li>Введіть <strong>текст варіанту</strong>.</li>
+                                            <li>Позначте <strong>правильну(-і) відповідь(-і)</strong>, клікнувши на чекбокс/радіокнопку зліва від тексту.</li>
+                                            <li>За потреби додайте <strong>зображення до варіанту</strong> (аналогічно до зображення питання).</li>
+                                            <li>Натисніть <kbd>×</kbd> справа від тексту варіанту, щоб видалити його.</li>
+                                        </ul>
+                                    </li>
+                                    <li>Щоб видалити все питання, натисніть <kbd><i class="fas fa-times"></i></kbd> у заголовку картки питання.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h5 class="mt-3">3.4. Імпорт та Експорт Тестів</h5>
+                        <ul>
+                            <li><strong>Експорт ZIP:</strong>
+                                <ul>
+                                    <li>Натисніть <kbd><i class="fas fa-file-export mr-2"></i>Експорт ZIP</kbd>.</li>
+                                    <li>Тест (включно з усіма питаннями, варіантами, налаштуваннями та зображеннями) буде збережено у ZIP-архів. Файл <code>test.json</code> містить структуру, а зображення - у папці <code>images</code>.</li>
+                                    <li>Це зручно для резервного копіювання або перенесення тестів.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Імпорт ZIP:</strong>
+                                <ul>
+                                    <li>Натисніть <kbd><i class="fas fa-file-import mr-2"></i>Імпорт ZIP</kbd> та оберіть файл.</li>
+                                    <li><strong>Увага:</strong> Імпорт повністю перезапише поточні дані на сторінці конструктора.</li>
+                                    <li>Система завантажить структуру тесту та зображення з архіву.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <h5 class="mt-3">3.5. Збереження Тесту</h5>
+                        <ul>
+                            <li>Після того, як ви заповнили всю необхідну інформацію та додали питання, натисніть <kbd><i class="fas fa-save mr-2"></i>Зберегти тест</kbd> внизу сторінки.</li>
+                            <li>Ви будете перенаправлені на Панель керування, де побачите свій новий тест.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Розділ 4: Робота з Результатами -->
+            <div class="card form-section-card guide-section-card mt-3">
+                <div class="card-header" id="headingFour">
+                    <h5 class="mb-0">
+                        <button class="btn btn-link text-light collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            <i class="fas fa-poll mr-2"></i>4. Робота з Результатами
+                            <i class="fas fa-chevron-down float-right"></i>
+                        </button>
+                    </h5>
+                </div>
+                <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#guideAccordion">
+                    <div class="card-body">
+                        <p>Після того, як учасники пройдуть ваш тест, ви можете переглянути та проаналізувати їхні результати.</p>
+                        <ul>
+                            <li>На <strong>Панелі керування</strong>, знайдіть потрібний тест та натисніть кнопку <kbd>Результати</kbd>.</li>
+                            <li><strong>Список результатів:</strong>
+                                <ul>
+                                    <li>Відображається таблиця з ім'ям учасника, його результатом (кількість балів / загальна кількість питань та прогрес-бар), датою проходження.</li>
+                                    <li>Результати автоматично відсортовані за датою (новіші зверху).</li>
+                                    <li>Клікнувши на рядок з результатом, ви перейдете до <strong>детального перегляду</strong> відповідей цього учасника.</li>
+                                    <li>Справа від кожного результату є кнопка <kbd><i class="fas fa-trash"></i></kbd> для видалення цього конкретного запису.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Детальний перегляд результату:</strong>
+                                <ul>
+                                    <li>Ви побачите кожне питання тесту, варіанти відповідей, як відповів учасник (позначено іконками <i class="fas fa-check text-success"></i> або <i class="fas fa-times text-danger"></i>), та які відповіді були правильними.</li>
+                                    <li>Зображення, якщо вони були, також відображаються.</li>
+                                    <li>Вказано кількість балів за кожне питання.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Експорт результатів:</strong>
+                                <ul>
+                                    <li>На сторінці списку результатів натисніть кнопку <kbd><i class="fas fa-file-export mr-2"></i>Експорт</kbd>.</li>
+                                    <li>У модальному вікні виберіть:
+                                        <ul>
+                                            <li><strong>Формат файлу:</strong> TXT, JSON, XLSX.</li>
+                                            <li><strong>Рівень деталізації:</strong> Спрощено (тільки загальні бали) або Детально (з відповідями на кожне питання).</li>
+                                        </ul>
+                                    </li>
+                                    <li>Натисніть <kbd>Експортувати</kbd>, і файл буде завантажено.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <p class="mt-5 text-center text-muted">Якщо у вас виникли питання, які не описані в цьому гайді, будь ласка, зверніться до адміністратора платформи.</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
